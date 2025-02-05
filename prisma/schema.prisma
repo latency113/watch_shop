@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  approved
+  pending
+  rejected
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  category_id Int
+  name        String
+  price       Float
+  description String?
+  quantity    Int
+  picture     String?
+  Category    Category @relation(fields: [category_id], references: [id])
+  Detail      Detail[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  name     String
+  email    String  @unique
+  address  String
+  tel      String
+  password String
+  picture  String?
+  order    Order[]
+}
+
+model Order {
+  id           Int      @id @default(autoincrement())
+  user_id      Int
+  order_date   DateTime @default(now()) @db.Timestamp()
+  status       Status   @default(pending)
+  payment_date DateTime ?
+  user         User     @relation(fields: [user_id], references: [id])
+  detail       Detail[]
+}
+
+model Detail {
+  id         Int     @id @default(autoincrement())
+  product_id Int
+  order_id   Int
+  order      Order   @relation(fields: [order_id], references: [id])
+  product    Product @relation(fields: [product_id], references: [id])
+}
