@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2025 at 04:35 PM
+-- Generation Time: Feb 16, 2025 at 01:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,7 +72,9 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`id`, `user_id`, `order_date`, `status`, `payment_date`) VALUES
-(1, 1, '2025-02-05 15:16:52', 'pending', '2025-02-05 22:16:52.000');
+(1, 1, '2025-02-05 15:16:52', 'approved', '2025-02-05 22:16:52.000'),
+(2, 1, '2025-02-16 04:04:29', 'pending', NULL),
+(3, 1, '2025-02-16 04:09:10', 'pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `picture`, `address`, `tel`) VALUES
-(1, 'test', 'test1@gmail.com', '$2b$10$HPpjZlC9zUEKnildSqcjVeZfhBCjwM1fTeUssYhBxJMGDpkp5THi6', 'picture-1738766555882-504447871.jpg', 'dadaa', '12121');
+(1, 'test111', 'test@gmail.com', '$2b$10$d9zus4CNpI6Vl8BsLWtIkedHoonCQX8jglpebWeMK2bAHn0662dPu', 'picture-1739706215810-60307761.png', 'เทสๆๆ', '12');
 
 -- --------------------------------------------------------
 
@@ -151,7 +153,8 @@ INSERT INTO `_prisma_migrations` (`id`, `checksum`, `finished_at`, `migration_na
 ('7b1add3f-4b9b-457a-beda-1366c6f5c9c7', '18d2336eb3457fee649ea9e72e33517ad4b22e7b8e062676da52c84a8cc92828', '2025-02-05 15:07:02.675', '20250205150702_update', NULL, NULL, '2025-02-05 15:07:02.606', 1),
 ('91eaef51-2e02-4c14-972d-bdc5ba69a901', 'a5d3bad95cb39336476dc23b309ba3fa92df74d277a04d2278ca977290f004d3', '2025-02-05 14:00:22.735', '20241226080050_init', NULL, NULL, '2025-02-05 14:00:22.660', 1),
 ('9a55e9cb-a3db-44f0-a320-cf7e73b28f51', 'eef124822dbb32e7a657dc7fcb82ea25b83cfc0b92eab24161d060f7532eb3ce', '2025-02-05 14:00:23.467', '20250205140023_update', NULL, NULL, '2025-02-05 14:00:23.355', 1),
-('a6b6ccec-7054-4ea6-b034-adb011c3f2e0', 'bf7dbaaeed120fb850af4780f303bec4a4b808bc27176377a767259804a16e65', '2025-02-05 15:01:07.012', '20250205150106_update', NULL, NULL, '2025-02-05 15:01:06.931', 1);
+('a6b6ccec-7054-4ea6-b034-adb011c3f2e0', 'bf7dbaaeed120fb850af4780f303bec4a4b808bc27176377a767259804a16e65', '2025-02-05 15:01:07.012', '20250205150106_update', NULL, NULL, '2025-02-05 15:01:06.931', 1),
+('f6ca149d-cf83-49e1-aaeb-eb6492d223d4', 'cf39ccf38de2a6487c4b6af9fa6e4b46afe3e9dd401d368d61289f5d10d1ed73', '2025-02-16 12:04:34.810', '20250216120434_update', NULL, NULL, '2025-02-16 12:04:34.742', 1);
 
 --
 -- Indexes for dumped tables
@@ -212,13 +215,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `detail`
 --
 ALTER TABLE `detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -230,7 +233,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -247,7 +250,7 @@ ALTER TABLE `detail`
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `Order_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `Order_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `product`
