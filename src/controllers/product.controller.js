@@ -113,5 +113,5 @@ exports.delete = async (req, res) => {
       id: parseInt(id),
     },
   });
-  res.json(product);
+  res.json({message:"success" ,product});
 };

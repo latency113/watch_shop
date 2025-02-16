@@ -60,10 +60,10 @@ exports.delete = async (req,res) => {
   try {
     const category = await prisma.category.delete({
       where: {
-        id: id,
+        id: parseInt(id),
       }
     })
-    res.json(category)
+    res.json({message:"success" ,category});
   } catch (error) {
     res.status(500).json({ error: error.message})
   }

@@ -48,7 +48,7 @@ model Order {
   order_date   DateTime @default(now()) @db.Timestamp()
   status       Status   @default(pending)
   payment_date DateTime ?
-  user         User     @relation(fields: [user_id], references: [id])
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   detail       Detail[]
 }
 

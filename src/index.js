@@ -12,6 +12,7 @@ const categoriesRoute = require('./routes/categories.route');
 const authRoute = require("./routes/auth.route");
 const userRoute = require("./routes/user.route");
 const orderRoute = require("./routes/order.route");
+const orderDetailRoute = require("./routes/detail.route");
 
 
 app.use('/images', express.static('images'));
@@ -29,6 +30,7 @@ app.use("/categories", categoriesRoute);
 app.use("/auths", authRoute);
 app.use("/users", userRoute);
 app.use("/orders", orderRoute);
+app.use("/details", orderDetailRoute);
  
 app.listen(port, () => {
     console.log("App stared at port: " + port);
